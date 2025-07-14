@@ -1,0 +1,34 @@
+import { Browsers } from "./browser";
+import { Category } from "./category";
+import { Developer } from "./developer";
+import { Media } from "./media";
+import { Stats } from "./stats";
+
+export type Extension = {
+  id: number;
+  name: string;
+  description: string;
+  longDescription: string;
+  price: number;
+  originalPrice?: number;
+  category: Category;
+  browsers: Browsers[];
+  rating: number;
+  totalRatings: number;
+  users: string;
+  features: string[];
+  tags: string[];
+  media: Media[];
+  screenshots: string[];
+  version: string;
+  size: string;
+  lastUpdated: string;
+  permissions: string[];
+  developer: Developer;
+  stats: Stats;
+  isPopular: boolean;
+  isFeatured: boolean;
+  isNew: boolean;
+  gradientFrom: string;
+  gradientTo: string;
+};
