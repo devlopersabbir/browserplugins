@@ -115,6 +115,7 @@
 @layer base {
   * {
     @apply border-border outline-ring/50;
+    @apply outline-none focus-visible:border-none focus-visible:outline-none;
   }
   body {
     @apply bg-background text-foreground;

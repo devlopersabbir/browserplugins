@@ -5,5 +5,6 @@ export const category = [
   "social",
   "entertainment",
   "utility",
+  "all",
 ] as const;
 export type Category = (typeof category)[number];

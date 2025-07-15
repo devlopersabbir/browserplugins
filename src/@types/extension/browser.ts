@@ -1,7 +1,8 @@
-export const browsers = [
-  "Chrome",
-  "FireFox",
-  "Microsoft Edge",
-  "Safary",
+export const browser = [
+  "chrome",
+  "firefox",
+  "microsoft-edge",
+  "safary",
+  "all",
 ] as const;
-export type Browsers = (typeof browsers)[number];
+export type Browser = (typeof browser)[number];

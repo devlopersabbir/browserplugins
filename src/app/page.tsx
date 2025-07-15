@@ -6,10 +6,11 @@ import { Extension } from "@/@types";
 import { extensions } from "@/constants";
 import Header from "@/components/shared/header";
 import Hero from "./_components/home/hero";
-import SearchFilters from "./_components/home/search-filters";
+import SearchFilters from "./_components/home/filters/search-filters";
 import CardGrid from "./_components/home/card-grid";
 import Stats from "./_components/home/Stats";
 import Footer from "@/components/shared/footer";
+import BaseFilters from "./_components/home/filters/base-filters";
 
 export default function HomePage() {
   const [searchQuery, setSearchQuery] = useState("");
@@ -95,14 +96,21 @@ export default function HomePage() {
 
   return (
     <div className="min-h-screen bg-background text-foreground relative overflow-hidden">
-      {/* Header */}
-      <Header />
+      <header className="sticky z-50 border-b border-border bg-background/70 backdrop-blur-xl top-0">
+        <Header />
+      </header>
 
       {/* Hero Section */}
-      <Hero />
+
+      <section className="relative py-20 px-6 bg-gradient-to-br from-background to-muted">
+        <Hero />
+      </section>
 
       {/* Search and Filters */}
-      <SearchFilters />
+      <section className="relative py-12 px-6 bg-background">
+        <SearchFilters />
+        {/* <BaseFilters /> */}
+      </section>
 
       {/* Extensions Grid */}
       <CardGrid />
