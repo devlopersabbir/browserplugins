@@ -1,4 +1,4 @@
-import { Browsers } from "./browser";
+import { Browser } from "./browser";
 import { Category } from "./category";
 import { Developer } from "./developer";
 import { Media } from "./media";
@@ -12,7 +12,7 @@ export type Extension = {
   price: number;
   originalPrice?: number;
   category: Category;
-  browsers: Browsers[];
+  browsers: Browser[];
   rating: number;
   totalRatings: number;
   users: string;

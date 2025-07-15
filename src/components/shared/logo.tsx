@@ -1,6 +1,8 @@
+import Link from "next/link";
+
 export default function Logo() {
   return (
-    <div className="flex items-center space-x-4">
+    <Link href="/" className="flex items-center space-x-4">
       <div className="relative">
         <div className="w-12 h-12 bg-gradient-to-r from-purple-500 via-pink-500 to-blue-500 rounded-2xl flex items-center justify-center shadow-2xl shadow-purple-500/25">
           <span className="text-white font-black text-xl">BP</span>
@@ -15,6 +17,6 @@ export default function Logo() {
           Premium Store
         </p>
       </div>
-    </div>
+    </Link>
   );
 }
