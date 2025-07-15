@@ -1,10 +1,11 @@
-import { Fragment, PropsWithChildren } from "react";
+"use client";
+import { PropsWithChildren } from "react";
 import { ThemeProvider } from "./theme-provider";
 
 export default function BaseProviders({ children }: PropsWithChildren) {
   return (
-    <Fragment>
-      <ThemeProvider>{children}</ThemeProvider>
-    </Fragment>
+    <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+      {children}
+    </ThemeProvider>
   );
 }
