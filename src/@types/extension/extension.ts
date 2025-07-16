@@ -29,6 +29,6 @@ export type Extension = {
   isPopular: boolean;
   isFeatured: boolean;
   isNew: boolean;
-  gradientFrom: string;
-  gradientTo: string;
+  gradientFrom?: string;
+  gradientTo?: string;
 };

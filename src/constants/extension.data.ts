@@ -1,6 +1,5 @@
 import { Extension } from "@/@types";
 
-// Comprehensive extension data with unique gradients
 export const extensions: Extension[] = [
   {
     id: 1,
@@ -29,17 +28,25 @@ export const extensions: Extension[] = [
       {
         type: "video",
         url: "https://www.youtube.com/embed/dQw4w9WgXcQ", // Example YouTube embed URL
-        thumbnail: "/placeholder.svg?height=400&width=600",
+        thumbnail: "/placeholder-thumb.jpg",
       },
     ],
-    screenshots: ["/placeholder.svg?height=400&width=600"],
+    screenshots: [
+      "/placeholder.svg?height=400&width=600",
+      "/placeholder-thumb.jpg",
+      "/placeholder.svg?height=400&width=600",
+      "/placeholder-thumb.jpg",
+      "/placeholder.svg?height=400&width=600",
+      "/placeholder-thumb.jpg",
+      "/placeholder.svg?height=400&width=600",
+    ],
     version: "3.2.1",
     size: "2.1 MB",
     lastUpdated: "2024-12-10",
     permissions: ["Access to active tab", "Storage permissions"],
     developer: {
       name: "BrowserPlugins",
-      avatar: "/placeholder.svg?height=40&width=40",
+      avatar: "https://avatars.githubusercontent.com/u/82939905?v=4",
       verified: true,
     },
     stats: {
