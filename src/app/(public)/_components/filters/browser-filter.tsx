@@ -32,7 +32,7 @@ export default function BrowserFilter({
         <SelectContent className="bg-popover backdrop-blur-2xl border-border rounded-xl">
           {browsers.map((b, i) => (
             <SelectItem
-              key={b.value}
+              key={i}
               value={b.value}
               className="text-foreground hover:bg-accent rounded-lg"
             >

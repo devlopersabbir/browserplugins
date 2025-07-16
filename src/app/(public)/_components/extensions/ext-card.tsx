@@ -1,7 +1,8 @@
 import { Extension } from "@/@types";
 import { Play, Chrome, Globe, Star, Users, Eye } from "lucide-react";
-import ToggleWishlist from "./toggle-wish-list";
+import ToggleWishlist from "../toggle-wish-list";
 import { Badge } from "@/components/ui/badge";
+import PlayButton from "../play-button";
 
 type Props = {
   extension: Extension;
@@ -56,9 +57,7 @@ export default function ExtCard({ extension, index }: Props) {
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
               <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300">
-                <div className="w-16 h-16 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center border border-white/30 hover:scale-110 transition-transform duration-300">
-                  <Play className="w-8 h-8 text-white ml-1" />
-                </div>
+                <PlayButton extension={extension} />
               </div>
               <Badge className="absolute bottom-4 right-4 bg-black/50 backdrop-blur-sm text-white border border-white/20 px-3 py-1 rounded-full">
                 <Play className="w-3 h-3 mr-1" />

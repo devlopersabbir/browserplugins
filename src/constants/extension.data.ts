@@ -3,60 +3,56 @@ import { Extension } from "@/@types";
 export const extensions: Extension[] = [
   {
     id: 1,
-    name: "ProductivityPro Max",
+    name: "YouTube Video Downloader",
     description:
-      "Ultimate productivity suite with AI-powered task management and focus tools",
+      "A powerful tool allows you to easily download your favorite videos from YouTube with just a few clicks.",
     longDescription:
-      "Transform your workflow with our comprehensive productivity extension featuring AI task prioritization, advanced tab management, focus modes, and detailed analytics.",
-    price: 39.99,
-    originalPrice: 59.99,
-    category: "productivity",
-    browsers: ["chrome", "firefox"],
-    rating: 4.9,
-    totalRatings: 1247,
-    users: "25K+",
+      "Introducing the YouTube Video Downloader Chrome Extension - a powerful tool allows you to easily download your favorite videos from YouTube with just a few clicks. With its user-friendly interface and lightning-fast download speeds, this extension is the perfect solution for anyone looking to save their favorite videos for offline viewing. Download now and experience the convenience of having your favorite YouTube videos at your fingertips!",
+    price: 30,
+    originalPrice: 45,
+    category: "social",
+    browsers: ["chrome"],
+    rating: 5,
+    totalRatings: 0,
+    users: "1+",
     features: [
-      "AI Task Management",
-      "Focus Mode",
-      "Tab Grouping",
-      "Time Tracking",
-      "Analytics Dashboard",
-      "Pomodoro Timer",
+      "Download Popup",
+      "URL Fetch",
+      "Download Video From YouTube",
+      "Able to change video quality",
+      "Awesome User Interface",
+      "Fetch YouTube Thumbnail too",
     ],
-    tags: ["productivity", "ai", "focus", "time-management"],
+    tags: ["social", "youtube", "tools", "video downloader"],
     media: [
       {
         type: "video",
-        url: "https://www.youtube.com/embed/dQw4w9WgXcQ", // Example YouTube embed URL
+        url: `<iframe width="1182" height="665" src="https://www.youtube.com/embed/Y0vW-xrDH30" title="🔥 Build OWN YouTube Video Downloader Chrome Extension With #react  &amp; #CRXJS | [2023 - ST SABBIR]" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>`, // Example YouTube embed URL
         thumbnail: "/placeholder-thumb.jpg",
       },
     ],
     screenshots: [
-      "/placeholder.svg?height=400&width=600",
       "/placeholder-thumb.jpg",
-      "/placeholder.svg?height=400&width=600",
       "/placeholder-thumb.jpg",
-      "/placeholder.svg?height=400&width=600",
       "/placeholder-thumb.jpg",
-      "/placeholder.svg?height=400&width=600",
     ],
-    version: "3.2.1",
-    size: "2.1 MB",
-    lastUpdated: "2024-12-10",
-    permissions: ["Access to active tab", "Storage permissions"],
+    version: "1.2.7",
+    size: "1.23 MB",
+    lastUpdated: "Sep 26, 2024",
+    permissions: ["No Permission Needed"],
     developer: {
-      name: "BrowserPlugins",
+      name: "Sabbir Hossian Shuvo",
       avatar: "https://avatars.githubusercontent.com/u/82939905?v=4",
       verified: true,
     },
     stats: {
-      downloads: 25000,
-      likes: 2100,
-      views: 45000,
+      downloads: 2,
+      likes: 5,
+      views: 10,
     },
     isPopular: true,
     isFeatured: true,
-    isNew: false,
+    isNew: true,
     gradientFrom: "#8B5CF6",
     gradientTo: "#EC4899",
   },
@@ -84,7 +80,7 @@ export const extensions: Extension[] = [
     media: [
       {
         type: "video",
-        url: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+        url: `<iframe width="1182" height="665" src="https://www.youtube.com/embed/Y0vW-xrDH30" title="🔥 Build OWN YouTube Video Downloader Chrome Extension With #react  &amp; #CRXJS | [2023 - ST SABBIR]" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>`, // Example YouTube embed URL
         thumbnail: "/placeholder.svg?height=400&width=600",
       },
     ],
@@ -108,6 +104,26 @@ export const extensions: Extension[] = [
     isNew: false,
     gradientFrom: "#10B981",
     gradientTo: "#06B6D4",
+    changelog: [
+      {
+        version: "3.2.1",
+        date: "2024-12-10",
+        changes: [
+          "Fixed tab grouping bug",
+          "Improved AI task suggestions",
+          "Enhanced dark mode",
+        ],
+      },
+      {
+        version: "3.2.0",
+        date: "2024-12-01",
+        changes: [
+          "Added AI-powered task prioritization",
+          "New analytics dashboard",
+          "Performance improvements",
+        ],
+      },
+    ],
   },
   {
     id: 3,
@@ -179,7 +195,7 @@ export const extensions: Extension[] = [
     media: [
       {
         type: "video",
-        url: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+        url: `<iframe width="1182" height="665" src="https://www.youtube.com/embed/Y0vW-xrDH30" title="🔥 Build OWN YouTube Video Downloader Chrome Extension With #react  &amp; #CRXJS | [2023 - ST SABBIR]" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>`, // Example YouTube embed URL
         thumbnail: "/placeholder.svg?height=400&width=600",
       },
     ],
@@ -273,7 +289,7 @@ export const extensions: Extension[] = [
     media: [
       {
         type: "video",
-        url: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+        url: `<iframe width="1182" height="665" src="https://www.youtube.com/embed/Y0vW-xrDH30" title="🔥 Build OWN YouTube Video Downloader Chrome Extension With #react  &amp; #CRXJS | [2023 - ST SABBIR]" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>`, // Example YouTube embed URL
         thumbnail: "/placeholder.svg?height=400&width=600",
       },
     ],

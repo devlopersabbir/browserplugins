@@ -3,7 +3,7 @@ import Link from "next/link";
 
 export default function Footer() {
   return (
-    <footer className="relative border-t border-border bg-background/50 backdrop-blur-2xl py-16 px-6">
+    <footer className="relative border-t border-border bg-background/50 backdrop-blur-2xl py-8 px-6">
       <div className="container mx-auto">
         <div className="max-w-6xl mx-auto">
           <div className="grid md:grid-cols-4 gap-12">
@@ -87,8 +87,15 @@ export default function Footer() {
           </div>
           <div className="border-t border-border mt-12 pt-8 text-center">
             <p className="text-muted-foreground text-lg">
-              &copy; 2024 BrowserPlugins. All rights reserved. Made with ❤️ for
-              developers.
+              &copy; 2024 BrowserPlugins. <br />
+              All rights reserved. Made with ❤️ by{" "}
+              <Link
+                href={"devlopersabbir.github.io"}
+                className="font-bold hover:border-b-2"
+              >
+                Sabbir Hossian Shuvo
+              </Link>
+              .
             </p>
           </div>
         </div>

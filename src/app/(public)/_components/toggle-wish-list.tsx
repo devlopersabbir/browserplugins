@@ -54,7 +54,7 @@ export default function ToggleWishlist({ extension }: Props) {
       </Button>
       <Link href={`/extension/${extension.id}`}>
         <Button
-          className="text-white border-0 rounded-xl px-4 py-2 font-semibold transition-all duration-300 hover:scale-105 hover:shadow-lg"
+          className="text-white border-0 rounded-xl px-4 py-2 font-semibold transition-all duration-300 hover:scale-105 hover:shadow-lg cursor-pointer"
           style={{
             background: `linear-gradient(135deg, ${extension.gradientFrom}, ${extension.gradientTo})`,
           }}

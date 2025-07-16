@@ -1,7 +1,6 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { Checkbox } from "@/components/ui/checkbox";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { FormEvent } from "react";
@@ -15,6 +14,19 @@ export default function RegisterForm() {
 
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
+      <div>
+        <Label htmlFor="name" className="text-foreground">
+          Name
+        </Label>
+        <Input
+          id="name"
+          type="text"
+          name="name"
+          placeholder="Sabbir"
+          required
+          className="bg-input/10 border-input text-foreground placeholder-muted-foreground"
+        />
+      </div>
       <div>
         <Label htmlFor="email" className="text-foreground">
           Email

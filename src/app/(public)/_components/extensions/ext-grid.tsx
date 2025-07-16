@@ -1,41 +1,9 @@
-"use client";
-import { Button } from "@/components/ui/button";
 import { extensions } from "@/constants";
-import {
-  Filter,
-  Badge,
-  Play,
-  Chrome,
-  Globe,
-  Star,
-  Users,
-  Eye,
-  Heart,
-  Link,
-  Download,
-  Search,
-} from "lucide-react";
-import { useState } from "react";
-import { toast } from "sonner";
+import { Search } from "lucide-react";
 import ExtGridHeader from "./ext-grid-header";
 import ExtCard from "./ext-card";
 
 export default function ExtGrid() {
-  //   const [filteredExtensions, setFilteredExtensions] = useState<Extension[]>([]);
-  const [wishlist, setWishlist] = useState<number[]>([]);
-
-  const toggleWishlist = (id: number) => {
-    setWishlist((prevWishlist) => {
-      if (prevWishlist.includes(id)) {
-        toast.info("Removed from Wishlist");
-        return prevWishlist.filter((itemId) => itemId !== id);
-      } else {
-        toast.info("Added to Wishlist");
-        return [...prevWishlist, id];
-      }
-    });
-  };
-
   return (
     <div className="container mx-auto">
       <div className="max-w-7xl mx-auto">

@@ -31,4 +31,10 @@ export type Extension = {
   isNew: boolean;
   gradientFrom?: string;
   gradientTo?: string;
+
+  changelog?: {
+    version: string;
+    date: string;
+    changes: string[];
+  }[];
 };

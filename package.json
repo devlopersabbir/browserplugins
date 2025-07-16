@@ -1,6 +1,6 @@
 {
   "name": "browserplugins",
-  "version": "0.1.0",
+  "version": "1.1.2",
   "private": true,
   "scripts": {
     "dev": "next dev --turbopack",
@@ -18,9 +18,11 @@
     "@radix-ui/react-separator": "^1.1.7",
     "@radix-ui/react-slider": "^1.3.5",
     "@radix-ui/react-slot": "^1.2.3",
+    "@radix-ui/react-tabs": "^1.1.12",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "lucide-react": "^0.525.0",
+    "moment": "^2.30.1",
     "next": "15.3.5",
     "next-themes": "^0.4.6",
     "postcss": "^8.5.6",
