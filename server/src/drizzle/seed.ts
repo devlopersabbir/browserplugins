@@ -14,7 +14,7 @@ const pool = new Pool({
 });
 const db = drizzle(pool, { schema }) as NodePgDatabase<typeof schema>;
 
-export async function main() {
+async function main() {
   const userIds = await developerWithProfile(db);
   const extIds = await extensions(db, userIds);
 

@@ -1,11 +1,12 @@
 import { Module } from "@nestjs/common";
-import { ConfigService } from "@nestjs/config";
+import { ConfigModule, ConfigService } from "@nestjs/config";
 import { Pool } from "pg";
 import { drizzle, NodePgDatabase } from "drizzle-orm/node-postgres";
 import * as schema from "./schema";
 
-export const DRIZZLE = Symbol("DRIZZLE-CONNECTION");
+export const DRIZZLE = "DRIZZLE-CONNECTION" as const;
 @Module({
+  imports: [ConfigModule],
   providers: [
     {
       provide: DRIZZLE,
