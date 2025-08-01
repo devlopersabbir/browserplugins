@@ -1,59 +1,77 @@
 import {
-  boolean,
+  decimal,
+  index,
+  integer,
+  json,
   pgTable,
-  real,
-  serial,
   text,
-  varchar,
 } from "drizzle-orm/pg-core";
-import users from "../users/users.schema";
 import { relations } from "drizzle-orm";
-import media from "../media/media.schema";
-import extensionStats from "../extension-stats/extension-stats.schema";
-import tags from "../tags/tags.schema";
-import permissions from "../permissions/permissions.schema";
-import changelogs from "../changelogs/changelogs.schema";
-import screenshots from "../screenshots/screenshots.schema";
-import features from "../features/features.schema";
-import reviews from "../reviews/reviews.schema";
+import profiles from "../profiles/profiles.schema";
+import categories from "../categories/categories.schema";
+import { baseSchema } from "@/utils/db-utility";
+import { typedTextEnum } from "@/helper";
 
-const extensions = pgTable("extensions", {
-  id: serial("id").primaryKey(),
-  name: text("name").notNull(),
-  description: text("description"),
-  longDescription: text("long_description"),
-  price: real("price").notNull(),
-  originalPrice: real("original_price"),
-  category: text("category"),
-  rating: real("rating"),
-  totalRatings: serial("total_ratings"),
-  users: text("users"),
-  version: varchar("version", { length: 20 }),
-  size: text("size"),
-  lastUpdated: text("last_updated"),
-  isPopular: boolean("is_popular").default(false),
-  isFeatured: boolean("is_featured").default(false),
-  isNew: boolean("is_new").default(false),
-  gradientFrom: varchar("gradient_from", { length: 10 }),
-  gradientTo: varchar("gradient_to", { length: 10 }),
-  developerId: serial("developer_id").references(() => users.id),
-});
+export const browsers = [
+  "chrome",
+  "firefox",
+  "microsoft edge",
+  "safari",
+] as const;
+export const extensionStatus = [
+  "draft",
+  "pending",
+  "approved",
+  "rejected",
+  "suspended",
+] as const;
+const extensions = pgTable(
+  "extensions",
+  {
+    ...baseSchema,
+    sellerId: integer("seller_id")
+      .notNull()
+      .references(() => profiles.id, { onDelete: "cascade" }),
+    categoryId: integer("category_id").references(() => categories.id),
 
-export const extensionRelations = relations(extensions, ({ one, many }) => ({
-  developer: one(users, {
-    fields: [extensions.developerId],
-    references: [users.id],
-  }), // a extension has only one developer
-  media: many(media), // a extension should has many media
-  extensionStats: one(extensionStats, {
-    fields: [extensions.id],
-    references: [extensionStats.extensionId],
-  }), // a extension has only one stats
-  features: many(features), // many
-  tags: many(tags), // many
-  permissions: many(permissions), // many
-  changelogs: many(changelogs), // many
-  screenshots: many(screenshots), // many
-  reviews: many(reviews),
+    name: text("name").notNull(),
+    description: text("description").notNull(),
+    shortDescription: text("short_description"),
+    price: decimal("price", { precision: 10, scale: 2 }).notNull(),
+    version: text("version").notNull(),
+    browsers: json("browsers").$type<[]>().default([]),
+    tags: json("tags").$type<(typeof browsers)[number][]>().default([]),
+    iconUrl: text("icon_url"),
+    screenshots: json("screenshots").$type<string[]>().default([]),
+    videoUrl: text("video_url"),
+    downloadUrl: text("download_url"),
+    downloadCount: integer("download_count").default(0),
+    rating: decimal("rating", { precision: 3, scale: 2 }).default("0.00"),
+    reviewCount: integer("review_count").default(0),
+    status: typedTextEnum("status", extensionStatus).default("draft"),
+  },
+  (table) => ({
+    sellerIdIdx: index("extensions_seller_id_idx").on(table.sellerId),
+    categoryIdIdx: index("extensions_category_id_idx").on(table.categoryId),
+    statusIdx: index("extensions_status_idx").on(table.status),
+    nameIdx: index("extensions_name_idx").on(table.name),
+  }),
+);
+
+export const extensionsRelations = relations(extensions, ({ one, many }) => ({
+  seller: one(profiles, {
+    fields: [extensions.sellerId],
+    references: [profiles.id],
+  }),
+  category: one(categories, {
+    fields: [extensions.categoryId],
+    references: [categories.id],
+  }),
+  // purchases: many(purchases),
+  // reviews: many(reviews),
+  // wishlists: many(wishlists),
+  // downloads: many(downloads),
+  // earnings: many(earnings),
+  // files: many(extensionFiles),
 }));
 export default extensions;

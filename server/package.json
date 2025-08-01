@@ -19,8 +19,9 @@
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:e2e": "jest --config ./test/jest-e2e.json",
     "seed": "tsx src/drizzle/seed.ts",
-    "generate": "drizzle-kit generate",
-    "migrate": "drizzle-kit migrate"
+    "clean": "rm -rf src/drizzle/out && tsx src/drizzle/clean.ts",
+    "migrate": "drizzle-kit generate && cross-env DB_MIGRATING=true tsx src/drizzle/migrate.ts",
+    "generate": "drizzle-kit generate"
   },
   "dependencies": {
     "@nestjs/common": "^11.0.1",
@@ -50,6 +51,7 @@
     "@types/node": "^22.10.7",
     "@types/pg": "^8.15.4",
     "@types/supertest": "^6.0.2",
+    "cross-env": "^10.0.0",
     "drizzle-kit": "^0.31.4",
     "eslint": "^9.18.0",
     "eslint-config-prettier": "^10.0.1",

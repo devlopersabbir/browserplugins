@@ -1,18 +1,9 @@
 import "dotenv/config";
-import { drizzle, NodePgDatabase } from "drizzle-orm/node-postgres";
-import { Pool } from "pg";
 import * as schema from "./schema";
 import { developerWithProfile } from "./seeds/developer.seed";
 import { extensions } from "./seeds/extensions.seed";
 import { faker } from "@faker-js/faker";
-
-const databaseUrl = process.env.DATABASE_URL!;
-
-const pool = new Pool({
-  connectionString: databaseUrl,
-  ssl: true,
-});
-const db = drizzle(pool, { schema }) as NodePgDatabase<typeof schema>;
+import { db } from "./index";
 
 async function main() {
   const userIds = await developerWithProfile(db);

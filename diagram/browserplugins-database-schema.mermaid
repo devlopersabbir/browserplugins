@@ -1,0 +1,137 @@
+erDiagram
+    users {
+        string id PK
+        string email UK
+        string username UK
+        string full_name
+        string avatar_url
+        enum role
+        boolean email_verified
+        timestamp created_at
+        timestamp updated_at
+    }
+
+    seller_profiles {
+        string id PK
+        string user_id FK
+        string company_name
+        text bio
+        string website
+        string twitter
+        string github
+        decimal revenue_share
+        boolean verified
+        timestamp created_at
+        timestamp updated_at
+    }
+
+    extensions {
+        string id PK
+        string seller_id FK
+        string name
+        text description
+        text short_description
+        string category
+        decimal price
+        string version
+        json browsers
+        json tags
+        string icon_url
+        json screenshots
+        string video_url
+        string download_url
+        integer download_count
+        decimal rating
+        integer review_count
+        enum status
+        timestamp created_at
+        timestamp updated_at
+    }
+
+    purchases {
+        string id PK
+        string user_id FK
+        string extension_id FK
+        decimal amount
+        string stripe_payment_id
+        enum status
+        timestamp created_at
+    }
+
+    reviews {
+        string id PK
+        string user_id FK
+        string extension_id FK
+        integer rating
+        text comment
+        timestamp created_at
+        timestamp updated_at
+    }
+
+    wishlists {
+        string id PK
+        string user_id FK
+        string extension_id FK
+        timestamp created_at
+    }
+
+    downloads {
+        string id PK
+        string user_id FK
+        string extension_id FK
+        string ip_address
+        timestamp created_at
+    }
+
+    earnings {
+        string id PK
+        string seller_id FK
+        string extension_id FK
+        string purchase_id FK
+        decimal gross_amount
+        decimal platform_fee
+        decimal net_amount
+        enum status
+        timestamp created_at
+        timestamp paid_at
+    }
+
+    categories {
+        string id PK
+        string name UK
+        string slug UK
+        text description
+        string icon
+        integer sort_order
+        timestamp created_at
+    }
+
+    extension_files {
+        string id PK
+        string extension_id FK
+        string version
+        string file_url
+        string file_hash
+        integer file_size
+        timestamp created_at
+    }
+
+    users ||--o{ seller_profiles : "has"
+    users ||--o{ purchases : "makes"
+    users ||--o{ reviews : "writes"
+    users ||--o{ wishlists : "creates"
+    users ||--o{ downloads : "performs"
+    
+    seller_profiles ||--o{ extensions : "owns"
+    seller_profiles ||--o{ earnings : "receives"
+    
+    extensions ||--o{ purchases : "purchased"
+    extensions ||--o{ reviews : "reviewed"
+    extensions ||--o{ wishlists : "wishlisted"
+    extensions ||--o{ downloads : "downloaded"
+    extensions ||--o{ earnings : "generates"
+    extensions ||--o{ extension_files : "has_versions"
+    
+    categories ||--o{ extensions : "categorizes"
+    
+    purchases ||--|| earnings : "generates"
