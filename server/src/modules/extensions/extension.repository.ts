@@ -1,18 +1,26 @@
-import { DRIZZLE_CONNECTION } from "@/drizzle/drizzle.module";
-import { Inject, Injectable } from "@nestjs/common";
-import { SQL } from "drizzle-orm";
-import { NodePgDatabase } from "drizzle-orm/node-postgres";
-import * as schema from "@/drizzle/schema";
+import { Injectable } from "@nestjs/common";
+import { eq, SQL } from "drizzle-orm";
+import { db } from "@/drizzle";
+import { ExtensionSchema } from "./data-transfer-object/extension.dto";
+import extensions from "./extensions.schema";
 
 @Injectable()
 export class ExtensionRepository {
-  constructor(
-    @Inject(DRIZZLE_CONNECTION)
-    private readonly db: NodePgDatabase<typeof schema>,
-  ) {}
+  async create(input: ExtensionSchema) {
+    const [extension] = await db
+      .insert(extensions)
+      .values({ ...input, slug: String(input.slug) })
+      .returning();
+    return extension;
+  }
   async fetch() {
     const filter: SQL[] = [];
 
-    return await this.db.query.extensions.findMany();
+    return await db.query.extensions.findMany();
+  }
+  async findBySlug(slug: string) {
+    return await db.query.extensions.findFirst({
+      where: eq(extensions.slug, slug),
+    });
   }
 }

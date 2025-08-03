@@ -21,10 +21,10 @@ const users = pgTable(
     role: typedTextEnum("role", role, "user"),
     emailVerified: boolean("email_verified").default(true),
   },
-  (table) => ({
-    emailIdx: index("users_email_idx").on(table.email),
-    usernameIdx: index("user_username_idx").on(table.username),
-  }),
+  (table) => [
+    index("users_email_idx").on(table.email),
+    index("user_username_idx").on(table.username),
+  ],
 );
 
 export const userRelations = relations(users, ({ many, one }) => ({

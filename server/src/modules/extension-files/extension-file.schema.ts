@@ -3,7 +3,6 @@ import { baseSchema } from "@/utils/db-utility";
 import extensions from "../extensions/extensions.schema";
 import { relations } from "drizzle-orm";
 
-// Extension files table (for version management)
 const extensionFiles = pgTable(
   "extension_files",
   {
@@ -18,15 +17,10 @@ const extensionFiles = pgTable(
     fileHash: text("file_hash").notNull(),
     fileSize: integer("file_size").notNull(),
   },
-  (table) => ({
-    extensionIdIdx: index("extension_files_extension_id_idx").on(
-      table.extensionId,
-    ),
-    versionIdx: index("extension_files_version_idx").on(
-      table.extensionId,
-      table.version,
-    ),
-  }),
+  (table) => [
+    index("extension_files_extension_id_idx").on(table.extensionId),
+    index("extension_files_version_idx").on(table.extensionId, table.version),
+  ],
 );
 
 export const extensionFilesRelations = relations(extensionFiles, ({ one }) => ({

@@ -1,10 +1,7 @@
 import {
   pgTable,
-  serial,
   text,
   integer,
-  real,
-  timestamp,
   uniqueIndex,
   index,
 } from "drizzle-orm/pg-core";
@@ -26,13 +23,13 @@ const reviews = pgTable(
     rating: integer("rating").notNull(), // 1-5 stars
     comment: text("comment"),
   },
-  (table) => ({
-    userExtensionIdx: uniqueIndex("reviews_user_extension_idx").on(
+  (table) => [
+    uniqueIndex("reviews_user_extension_idx").on(
       table.userId,
       table.extensionId,
     ),
-    extensionIdIdx: index("reviews_extension_id_idx").on(table.extensionId),
-  }),
+    index("reviews_extension_id_idx").on(table.extensionId),
+  ],
 );
 
 export const reviewsRelations = relations(reviews, ({ one }) => ({

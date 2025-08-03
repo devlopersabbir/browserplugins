@@ -27,13 +27,11 @@ const purchases = pgTable(
     stripePaymentId: text("stripe_payment_id"),
     status: typedTextEnum("status", purchaseStatus).default("pending"),
   },
-  (table) => ({
-    userIdIdx: index("purchases_user_id_idx").on(table.userId),
-    extensionIdIdx: index("purchases_extension_id_idx").on(table.extensionId),
-    stripePaymentIdIdx: index("purchases_stripe_payment_id_idx").on(
-      table.stripePaymentId,
-    ),
-  }),
+  (table) => [
+    index("purchases_user_id_idx").on(table.userId),
+    index("purchases_extension_id_idx").on(table.extensionId),
+    index("purchases_stripe_payment_id_idx").on(table.stripePaymentId),
+  ],
 );
 
 export const purchasesRelations = relations(purchases, ({ one }) => ({

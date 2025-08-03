@@ -17,6 +17,7 @@ import wishlists from "../wishlists/wishlists.schema";
 import downloads from "../downloads/downloads.schema";
 import earnings from "../earnings/earnings.schema";
 import extensionFiles from "../extension-files/extension-file.schema";
+import users from "../users/users.schema";
 
 export const browsers = [
   "chrome",
@@ -37,16 +38,18 @@ const extensions = pgTable(
     ...baseSchema,
     sellerId: integer("seller_id")
       .notNull()
-      .references(() => profiles.id, { onDelete: "cascade" }),
+      .references(() => users.id, { onDelete: "cascade" }),
     categoryId: integer("category_id").references(() => categories.id),
 
     name: text("name").notNull(),
+    slug: text("slug").notNull().unique(),
+
     description: text("description").notNull(),
     shortDescription: text("short_description"),
     price: decimal("price", { precision: 10, scale: 2 }).notNull(),
     version: text("version").notNull(),
-    browsers: json("browsers").$type<[]>().default([]),
-    tags: json("tags").$type<(typeof browsers)[number][]>().default([]),
+    browsers: json("browsers").$type<(typeof browsers)[number][]>().default([]),
+    tags: json("tags").$type<string[]>().default([]),
     iconUrl: text("icon_url"),
     screenshots: json("screenshots").$type<string[]>().default([]),
     videoUrl: text("video_url"),
@@ -56,12 +59,12 @@ const extensions = pgTable(
     reviewCount: integer("review_count").default(0),
     status: typedTextEnum("status", extensionStatus).default("draft"),
   },
-  (table) => ({
-    sellerIdIdx: index("extensions_seller_id_idx").on(table.sellerId),
-    categoryIdIdx: index("extensions_category_id_idx").on(table.categoryId),
-    statusIdx: index("extensions_status_idx").on(table.status),
-    nameIdx: index("extensions_name_idx").on(table.name),
-  }),
+  (table) => [
+    index("extensions_seller_id_idx").on(table.sellerId),
+    index("extensions_category_id_idx").on(table.categoryId),
+    index("extensions_status_idx").on(table.status),
+    index("extensions_slug_idx").on(table.slug),
+  ],
 );
 
 export const extensionsRelations = relations(extensions, ({ one, many }) => ({

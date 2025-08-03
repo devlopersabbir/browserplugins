@@ -15,13 +15,13 @@ const wishlists = pgTable(
       .notNull()
       .references(() => extensions.id, { onDelete: "cascade" }),
   },
-  (table) => ({
-    userExtensionIdx: uniqueIndex("wishlists_user_extension_idx").on(
+  (table) => [
+    uniqueIndex("wishlists_user_extension_idx").on(
       table.userId,
       table.extensionId,
     ),
-    userIdIdx: index("wishlists_user_id_idx").on(table.userId),
-  }),
+    index("wishlists_user_id_idx").on(table.userId),
+  ],
 );
 export const wishlistsRelations = relations(wishlists, ({ one }) => ({
   user: one(users, {

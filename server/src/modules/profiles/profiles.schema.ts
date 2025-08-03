@@ -25,13 +25,11 @@ const profiles = pgTable(
     twitter: text("twitter"),
     github: text("github"),
     revenueShare: decimal("revenue_share", { precision: 5, scale: 2 }).default(
-      "70.00",
+      "00.00",
     ),
     verified: boolean("verified").default(false),
   },
-  (table) => ({
-    userIdIdx: uniqueIndex("profile_user_id_idx").on(table.userId),
-  }),
+  (table) => [uniqueIndex("profile_user_id_idx").on(table.userId)],
 );
 
 export const profilesRelations = relations(profiles, ({ one, many }) => ({

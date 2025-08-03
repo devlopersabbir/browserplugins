@@ -14,9 +14,7 @@ const categories = pgTable(
     icon: text("icon"),
     sortOrder: integer("sort_order").default(0),
   },
-  (table) => ({
-    slugIdx: index("categories_slug_idx").on(table.slug),
-  }),
+  (table) => [index("categories_slug_idx").on(table.slug)],
 );
 
 export const categoriesRelations = relations(categories, ({ many }) => ({

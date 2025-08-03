@@ -33,11 +33,11 @@ const earnings = pgTable(
     status: typedTextEnum("status", earningStatus).default("pending"),
     paidAt: createdAt("paid_at"),
   },
-  (table) => ({
-    sellerIdIdx: index("earnings_seller_id_idx").on(table.sellerId),
-    purchaseIdIdx: uniqueIndex("earnings_purchase_id_idx").on(table.purchaseId),
-    statusIdx: index("earnings_status_idx").on(table.status),
-  }),
+  (table) => [
+    index("earnings_seller_id_idx").on(table.sellerId),
+    uniqueIndex("earnings_purchase_id_idx").on(table.purchaseId),
+    index("earnings_status_idx").on(table.status),
+  ],
 );
 
 export const earningsRelations = relations(earnings, ({ one }) => ({

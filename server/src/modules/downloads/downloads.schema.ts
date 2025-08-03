@@ -17,11 +17,11 @@ const downloads = pgTable(
       .references(() => extensions.id, { onDelete: "cascade" }),
     ipAddress: text("ip_address"),
   },
-  (table) => ({
-    extensionIdIdx: index("downloads_extension_id_idx").on(table.extensionId),
-    userIdIdx: index("downloads_user_id_idx").on(table.userId),
-    createdAtIdx: index("downloads_created_at_idx").on(table.createdAt),
-  }),
+  (table) => [
+    index("downloads_extension_id_idx").on(table.extensionId),
+    index("downloads_user_id_idx").on(table.userId),
+    index("downloads_created_at_idx").on(table.createdAt),
+  ],
 );
 export const downloadsRelations = relations(downloads, ({ one }) => ({
   user: one(users, {
