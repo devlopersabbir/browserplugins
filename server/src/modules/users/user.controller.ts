@@ -1,24 +1,31 @@
 import { Body, Controller, Get, Post, UsePipes } from "@nestjs/common";
 import { UserService } from "./user.service";
-import { UserRepository } from "./user.repository";
-import { UserDto } from "./data-transfer-object/user.dto";
-import { ZodValidationPipe } from "nestjs-zod";
+import { userSchema, UserSchema } from "./data-transfer-object/user.dto";
+import { ValidationPipe } from "@/pipes";
 
 @Controller({
   path: "/users",
   version: "v1",
 })
 export class UserController {
-  constructor(private readonly userService: UserService) {}
+  constructor(private readonly service: UserService) {}
+
+  @Post("/register")
+  @UsePipes(new ValidationPipe(userSchema))
+  async store(@Body() body: UserSchema) {
+    try {
+      const user = await this.service.register(body);
+      console.log(user);
+      return {
+        message: `${user.fullName}, account created successfully 🎉`,
+      };
+    } catch (err) {
+      return err;
+    }
+  }
 
   @Get()
   async index() {
-    return this.userService.index();
-  }
-
-  @Post()
-  async store(@Body() body: UserDto) {
-    console.log(body);
-    return body;
+    return this.service.index();
   }
 }

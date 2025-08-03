@@ -7,12 +7,12 @@ const categories = pgTable(
   "categories",
   {
     ...baseSchema,
-    name: text("name").notNull().unique(),
+
+    name: text("name").notNull(),
     slug: text("slug").notNull().unique(),
     description: text("description"),
     icon: text("icon"),
     sortOrder: integer("sort_order").default(0),
-    createdAt: timestamp("created_at").defaultNow(),
   },
   (table) => ({
     slugIdx: index("categories_slug_idx").on(table.slug),

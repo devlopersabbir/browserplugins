@@ -9,6 +9,8 @@ import {
 import users from "../users/users.schema";
 import { baseSchema } from "@/utils/db-utility";
 import { relations } from "drizzle-orm";
+import extensions from "../extensions/extensions.schema";
+import earnings from "../earnings/earnings.schema";
 
 const profiles = pgTable(
   "profiles",
@@ -37,8 +39,8 @@ export const profilesRelations = relations(profiles, ({ one, many }) => ({
     fields: [profiles.userId],
     references: [users.id],
   }),
-  // extensions: many(extensions),
-  // earnings: many(earnings),
+  extensions: many(extensions),
+  earnings: many(earnings),
 }));
 
 export default profiles;

@@ -11,6 +11,12 @@ import profiles from "../profiles/profiles.schema";
 import categories from "../categories/categories.schema";
 import { baseSchema } from "@/utils/db-utility";
 import { typedTextEnum } from "@/helper";
+import purchases from "../purchases/purchases.schema";
+import reviews from "../reviews/reviews.schema";
+import wishlists from "../wishlists/wishlists.schema";
+import downloads from "../downloads/downloads.schema";
+import earnings from "../earnings/earnings.schema";
+import extensionFiles from "../extension-files/extension-file.schema";
 
 export const browsers = [
   "chrome",
@@ -67,11 +73,11 @@ export const extensionsRelations = relations(extensions, ({ one, many }) => ({
     fields: [extensions.categoryId],
     references: [categories.id],
   }),
-  // purchases: many(purchases),
-  // reviews: many(reviews),
-  // wishlists: many(wishlists),
-  // downloads: many(downloads),
-  // earnings: many(earnings),
-  // files: many(extensionFiles),
+  purchases: many(purchases),
+  reviews: many(reviews),
+  wishlists: many(wishlists),
+  downloads: many(downloads),
+  earnings: many(earnings),
+  files: many(extensionFiles),
 }));
 export default extensions;

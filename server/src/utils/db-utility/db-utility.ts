@@ -7,6 +7,7 @@ import {
 } from "drizzle-orm/pg-core";
 
 export const primaryId = (name: string = "id") => serial(name).primaryKey();
+
 export const primaryUuid = (name: string = "uuid") =>
   uuid(name).primaryKey().defaultRandom().unique();
 export const createdAt = (

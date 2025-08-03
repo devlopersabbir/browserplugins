@@ -13,11 +13,6 @@ export class ExtensionRepository {
   async fetch() {
     const filter: SQL[] = [];
 
-    return await this.db.query.extensions.findMany({
-      columns: {
-        category: true,
-        users: true,
-      },
-    });
+    return await this.db.query.extensions.findMany();
   }
 }

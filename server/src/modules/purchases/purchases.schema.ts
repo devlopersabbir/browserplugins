@@ -4,6 +4,7 @@ import users from "../users/users.schema";
 import extensions from "../extensions/extensions.schema";
 import { typedTextEnum } from "@/helper";
 import { relations } from "drizzle-orm";
+import earnings from "../earnings/earnings.schema";
 
 export const purchaseStatus = [
   "pending",
@@ -44,9 +45,9 @@ export const purchasesRelations = relations(purchases, ({ one }) => ({
     fields: [purchases.extensionId],
     references: [extensions.id],
   }),
-  //   earning: one(earnings, {
-  //     fields: [purchases.id],
-  //     references: [earnings.purchaseId],
-  //   }),
+  earning: one(earnings, {
+    fields: [purchases.id],
+    references: [earnings.purchaseId],
+  }),
 }));
 export default purchases;

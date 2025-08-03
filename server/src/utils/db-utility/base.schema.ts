@@ -1,8 +1,20 @@
-import { createdAt, primaryId, updatedAt } from "@/utils/db-utility";
+import { sql } from "drizzle-orm";
+import { serial, timestamp } from "drizzle-orm/pg-core";
 
 export const baseSchema = {
-  id: primaryId("id"),
+  // id: primaryId(),
+  id: serial("id").primaryKey(),
 
-  createdAt: createdAt("created_at"),
-  updatedAt: updatedAt("updated_at"),
+  createdAt: timestamp("createdAt", {
+    mode: "date",
+  })
+    .defaultNow()
+    .notNull(),
+  updatedAt: timestamp("updatedAt", {
+    mode: "date",
+  })
+    .$defaultFn(() => sql`NULL`)
+    .$onUpdateFn(() => new Date()),
+  // createdAt: createdAt(),
+  // updatedAt: updatedAt(),
 };
