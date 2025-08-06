@@ -1,11 +1,11 @@
-import { Extension } from "@/@types";
 import { Play, Chrome, Globe, Star, Users, Eye } from "lucide-react";
 import ToggleWishlist from "../toggle-wish-list";
 import { Badge } from "@/components/ui/badge";
 import PlayButton from "../play-button";
+import { ExtensionSchema } from "../../schemas/extension.schema";
 
 type Props = {
-  extension: Extension;
+  extension: ExtensionSchema;
   index: number;
 };
 export default function ExtCard({ extension, index }: Props) {
@@ -17,9 +17,9 @@ export default function ExtCard({ extension, index }: Props) {
       {/* Unique Glassy Card */}
       <div className="relative overflow-hidden rounded-3xl bg-card/5 backdrop-blur-2xl border border-border hover:border-primary/30 transition-all duration-500 group-hover:scale-[1.02] group-hover:shadow-2xl">
         {/* Gradient Overlay */}
-        <GradientOverlay extension={extension} index={index} />
+        <GradientOverlay />
         {/* Status Badges */}
-        <div className="absolute top-4 left-4 z-20 flex flex-wrap gap-2">
+        {/* <div className="absolute top-4 left-4 z-20 flex flex-wrap gap-2">
           {extension.isFeatured && (
             <Badge className="bg-gradient-to-r from-yellow-500/90 to-orange-500/90 backdrop-blur-sm text-white border-0 px-3 py-1 rounded-full font-semibold shadow-lg">
               ⭐ Featured
@@ -35,23 +35,15 @@ export default function ExtCard({ extension, index }: Props) {
               🔥 Popular
             </Badge>
           )}
-        </div>
+        </div> */}
 
         {/* Media Section with Gradient Overlay */}
         <div className="relative aspect-video overflow-hidden">
-          {/* Gradient Background */}
-          <div
-            className="absolute inset-0 opacity-60"
-            style={{
-              background: `linear-gradient(135deg, ${extension.gradientFrom}, ${extension.gradientTo})`,
-            }}
-          ></div>
-
           {/* Media Content */}
-          {extension.media[0]?.type === "video" ? (
+          {extension?.videoUrl ? (
             <div className="relative w-full h-full">
               <img
-                src={extension.media[0].thumbnail || extension.media[0].url}
+                src={extension.iconUrl}
                 alt={extension.name}
                 className="w-full h-full object-cover mix-blend-overlay transition-transform duration-500 group-hover:scale-110"
               />
@@ -67,7 +59,7 @@ export default function ExtCard({ extension, index }: Props) {
           ) : (
             <div className="relative w-full h-full">
               <img
-                src={extension.media[0]?.url || "/placeholder.svg"}
+                src={extension.iconUrl || "/placeholder.svg"}
                 alt={extension.name}
                 className="w-full h-full object-cover mix-blend-overlay transition-transform duration-500 group-hover:scale-110"
               />
@@ -98,7 +90,7 @@ export default function ExtCard({ extension, index }: Props) {
               {extension.name}
             </h3>
             <p className="text-muted-foreground text-sm leading-relaxed">
-              {extension.description}
+              {extension.shortDescription}
             </p>
           </div>
 
@@ -109,24 +101,22 @@ export default function ExtCard({ extension, index }: Props) {
               <span className="text-foreground font-medium">
                 {extension.rating}
               </span>
-              <span className="text-muted-foreground">
-                ({extension.totalRatings})
-              </span>
+              <span className="text-muted-foreground">({5})</span>
             </div>
             <div className="flex items-center space-x-1">
               <Users className="w-4 h-4 text-muted-foreground" />
-              <span className="text-muted-foreground">{extension.users}</span>
+              {/* <span className="text-muted-foreground">{extension.user}</span> */}
             </div>
-            <div className="flex items-center space-x-1">
+            {/* <div className="flex items-center space-x-1">
               <Eye className="w-4 h-4 text-muted-foreground" />
               <span className="text-muted-foreground">
                 {(extension.stats.views / 1000).toFixed(1)}K
               </span>
-            </div>
+            </div> */}
           </div>
 
           {/* Features */}
-          <div className="flex flex-wrap gap-2 mb-6">
+          {/* <div className="flex flex-wrap gap-2 mb-6">
             {extension.features.slice(0, 2).map((feature) => (
               <Badge
                 key={feature}
@@ -140,21 +130,21 @@ export default function ExtCard({ extension, index }: Props) {
                 +{extension.features.length - 2}
               </Badge>
             )}
-          </div>
+          </div> */}
 
           {/* Price and Actions */}
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-2">
-              {extension.originalPrice && (
+              {extension.price && (
                 <span className="text-muted-foreground line-through text-sm">
-                  ${extension.originalPrice}
+                  ${extension.price}
                 </span>
               )}
               <span
                 className="text-2xl font-black bg-gradient-to-r bg-clip-text text-transparent"
                 // TODO: we can use text-transparent to display with gradient color price
                 style={{
-                  backgroundImage: `linear-gradient(135deg, ${extension.gradientFrom}, ${extension.gradientTo})`,
+                  backgroundImage: `linear-gradient(135deg, #8B5CF6, #EC4899)`,
                 }}
               >
                 ${extension.price}
@@ -168,12 +158,12 @@ export default function ExtCard({ extension, index }: Props) {
   );
 }
 
-function GradientOverlay({ extension }: Props) {
+function GradientOverlay() {
   return (
     <div
       className="absolute inset-0 opacity-0 group-hover:opacity-20 transition-opacity duration-500"
       style={{
-        background: `linear-gradient(135deg, ${extension.gradientFrom}40, ${extension.gradientTo}40)`,
+        background: `linear-gradient(135deg, #8B5CF640, #EC489940)`,
       }}
     ></div>
   );

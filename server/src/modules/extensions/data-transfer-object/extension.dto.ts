@@ -1,34 +1,42 @@
 import { z } from "zod";
+import {
+  zId,
+  zOptionalId,
+  zDecimalString,
+  zEnum,
+  zSlug,
+  zSemver,
+  zOptionalUrl,
+  zStringArray,
+} from "@/utils";
 import { browsers, extensionStatus } from "../extensions.schema";
 
 export const extensionSchema = z.object({
-  name: z.string().min(1),
-  slug: z.string().optional(),
+  sellerId: zId("Seller ID"),
+  categoryId: zOptionalId("Category ID"),
 
-  sellerId: z.number(),
-  categoryId: z.number(),
+  name: z.string().min(3, "Name must be at least 3 characters"),
+  slug: zSlug(),
 
-  description: z.string().min(1),
-  shortDescription: z.string().optional(),
+  description: z.string().min(10, "Description must be at least 10 characters"),
+  shortDescription: z.string().max(255).optional(),
 
-  price: z.string().regex(/^\d{1,8}(\.\d{1,2})?$/, "Invalid price format"),
-  version: z.string().min(1),
+  price: zDecimalString(2),
+  originalPrice: zDecimalString(2),
 
-  browsers: z.array(z.enum(browsers)).default(["chrome"]),
-  tags: z.array(z.string()).optional(),
-  iconUrl: z.url().optional(),
-  screenshots: z.array(z.string()).optional(),
-  videoUrl: z.url().optional(),
-  downloadUrl: z.url().optional(),
+  version: zSemver(),
+  browsers: z.array(zEnum(browsers, "Browser")).default([]),
+  tags: zStringArray(),
+  screenshots: zStringArray(),
 
-  downloadCount: z.number().int().nonnegative().default(0),
-  rating: z
-    .string()
-    .regex(/^\d{1}(\.\d{1,2})?$/, "Invalid rating format")
-    .default("0.00"),
+  iconUrl: zOptionalUrl(),
+  videoUrl: zOptionalUrl(),
+  downloadUrl: zOptionalUrl().optional(),
 
-  reviewCount: z.number().int().nonnegative().optional(),
-  status: z.enum(extensionStatus).optional(),
+  downloadCount: z.number().int().min(0).default(0),
+  rating: zDecimalString(2).default("0.00"),
+  reviewCount: z.number().int().min(0).default(0),
+
+  status: zEnum(extensionStatus, "Status").default("draft"),
 });
-
 export type ExtensionSchema = z.infer<typeof extensionSchema>;

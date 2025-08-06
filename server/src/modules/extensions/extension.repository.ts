@@ -7,10 +7,7 @@ import extensions from "./extensions.schema";
 @Injectable()
 export class ExtensionRepository {
   async create(input: ExtensionSchema) {
-    const [extension] = await db
-      .insert(extensions)
-      .values({ ...input, slug: String(input.slug) })
-      .returning();
+    const [extension] = await db.insert(extensions).values(input).returning();
     return extension;
   }
   async fetch() {

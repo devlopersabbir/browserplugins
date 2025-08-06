@@ -1,9 +1,12 @@
-import { extensions } from "@/constants";
 import { Search } from "lucide-react";
 import ExtGridHeader from "./ext-grid-header";
 import ExtCard from "./ext-card";
+import { ExtensionSchema } from "../../schemas/extension.schema";
 
-export default function ExtGrid() {
+type Props = {
+  extensions: ExtensionSchema[];
+};
+export default async function ExtGrid({ extensions }: Props) {
   return (
     <div className="container mx-auto">
       <div className="max-w-7xl mx-auto">

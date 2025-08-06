@@ -4,7 +4,7 @@
   "description": "",
   "author": "",
   "private": true,
-  "license": "UNLICENSED",
+  "license": "MIT",
   "scripts": {
     "build": "nest build",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
@@ -20,8 +20,7 @@
     "test:e2e": "jest --config ./test/jest-e2e.json",
     "seed": "tsx src/drizzle/seed.ts",
     "clean": "rm -rf src/drizzle/out && tsx src/drizzle/clean.ts",
-    "migrate": "drizzle-kit generate && cross-env DB_MIGRATING=true tsx src/drizzle/migrate.ts",
-    "generate": "drizzle-kit generate"
+    "migrate": "drizzle-kit generate && cross-env DB_MIGRATING=true tsx src/drizzle/migrate.ts"
   },
   "dependencies": {
     "@nestjs/common": "^11.0.1",

@@ -1,6 +1,4 @@
-import { Extension } from "@/@types";
-
-export const extensions: Extension[] = [
+export const extensions = [
   {
     id: 1,
     name: "YouTube Video Downloader",

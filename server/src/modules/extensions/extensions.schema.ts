@@ -46,7 +46,13 @@ const extensions = pgTable(
 
     description: text("description").notNull(),
     shortDescription: text("short_description"),
+
     price: decimal("price", { precision: 10, scale: 2 }).notNull(),
+    originalPrice: decimal("original_price", {
+      precision: 10,
+      scale: 2,
+    }).notNull(),
+
     version: text("version").notNull(),
     browsers: json("browsers").$type<(typeof browsers)[number][]>().default([]),
     tags: json("tags").$type<string[]>().default([]),
